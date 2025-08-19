@@ -57,6 +57,8 @@ public class Apptentive: NSObject, EnvironmentDelegate, InteractionDelegate, Mes
     /// Supported types are `String`, `Bool`, and numbers.
     @BackendSync public var deviceCustomData: CustomData
 
+    @BackendSync public var customLocale: String?
+
     /// The number of unread messages in message center.
     @objc dynamic public var unreadMessageCount = 0
 
@@ -493,6 +495,7 @@ public class Apptentive: NSObject, EnvironmentDelegate, InteractionDelegate, Mes
         self._deviceCustomData = BackendSync(value: CustomData(), queue: backendQueue, updateMethod: backend.setDeviceCustomData)
         self._distributionName = BackendSync(value: nil, queue: backendQueue, updateMethod: backend.setDistributionName)
         self._distributionVersion = BackendSync(value: nil, queue: backendQueue, updateMethod: backend.setDistributionVersion)
+        self._customLocale = BackendSync(value: nil, queue: backendQueue, updateMethod: backend.setCustomLocale)
 
         super.init()
 
