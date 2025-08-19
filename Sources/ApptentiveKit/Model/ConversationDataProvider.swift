@@ -22,6 +22,7 @@ protocol AppDataProviding: Sendable {
     var distributionVersion: Version? { get set }
     var isDebugBuild: Bool { get }
     var isOverridingStyles: Bool { get set }
+    var customLocale: String? { get set }
 
     var bundleIdentifier: String? { get }
     var version: Version? { get }
@@ -65,6 +66,7 @@ struct ConversationDataProvider: ConversationDataProviding {
     var distributionVersion: Version?
     let isDebugBuild: Bool
     var isOverridingStyles: Bool
+    var customLocale: String?
     let identifierForVendor: UUID?
     let osName: String
     let osVersion: Version
@@ -131,9 +133,9 @@ struct ConversationDataProvider: ConversationDataProviding {
             self.isInForeground = true
         #endif
 
-        self.localeIdentifier = Locale.current.identifier
+        self.localeIdentifier = customLocale ?? Locale.current.identifier
         self.localeRegionCode = Locale.current.regionCode
-        self.preferredLocalization = Bundle.main.preferredLocalizations.first
+        self.preferredLocalization = customLocale ?? Bundle.main.preferredLocalizations.first
 
         self.timeZoneSecondsFromGMT = TimeZone.current.secondsFromGMT()
 

@@ -255,6 +255,11 @@ class Backend: PayloadAuthenticationDelegate {
         self.dataProvider.distributionVersion = distributionVersion.flatMap { Version(string: $0) }
     }
 
+    func setCustomLocale(_ customLocale: String?) {
+        self.conversation?.device.localeRaw = customLocale
+        self.dataProvider.customLocale = customLocale
+    }
+
     func setRemoteNotificationDeviceToken(_ tokenData: Data) {
         self.conversation?.device.remoteNotificationDeviceToken = tokenData
         self.dataProvider.remoteNotificationDeviceToken = tokenData
